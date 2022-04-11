@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "DUIHkGj4u2oC00dZr6p17T8Az1qvIX6gi4/gYQZKFW0=",
+  "Hash": "BNop2VbI5ajqIrxylPZHnG105vm6q6c0FVzvIrV88wg=",
   "Source": "Lira",
   "BasePath": "_content/Lira",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "/Users/rafalhrabia/Projects/dotnet/Lira/obj/Debug/net6.0/scopedcss/projectbundle/Lira.bundle.scp.css"
+    },
+    {
+      "Identity": "/Users/rafalhrabia/Projects/dotnet/Lira/wwwroot/.DS_Store",
+      "SourceId": "Lira",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/rafalhrabia/Projects/dotnet/Lira/wwwroot/",
+      "BasePath": "_content/Lira",
+      "RelativePath": ".DS_Store",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/.DS_Store"
     },
     {
       "Identity": "/Users/rafalhrabia/Projects/dotnet/Lira/wwwroot/content/jumbo.jpeg",

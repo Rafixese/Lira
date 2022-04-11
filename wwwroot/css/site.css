@@ -24,6 +24,12 @@ body {
   width: 100vw;
 }
 
+.jumbotron-text {
+  background-color: rgba(255,255,255,0.3);
+  border-radius: 10px;
+  margin-top: 10vh;
+}
+
 .navbar {
   margin-bottom: 0;
 }
