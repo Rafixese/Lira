@@ -34,7 +34,7 @@ namespace Lira.Controllers
             }
 
             var board = await _context.Board
-                .FirstOrDefaultAsync(m => m.UserId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (board == null)
             {
                 return NotFound();
@@ -54,11 +54,11 @@ namespace Lira.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("BoardId,Name,UserId")] Board board)
+        public async Task<IActionResult> Create([Bind("Id,Name,UserId")] Board board)
         {
             if (ModelState.IsValid)
             {
-                board.UserId = Guid.NewGuid();
+                board.Id = Guid.NewGuid();
                 _context.Add(board);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -87,9 +87,9 @@ namespace Lira.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("BoardId,Name,UserId")] Board board)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Name,UserId")] Board board)
         {
-            if (id != board.UserId)
+            if (id != board.Id)
             {
                 return NotFound();
             }
@@ -103,7 +103,7 @@ namespace Lira.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!BoardExists(board.UserId))
+                    if (!BoardExists(board.Id))
                     {
                         return NotFound();
                     }
@@ -126,7 +126,7 @@ namespace Lira.Controllers
             }
 
             var board = await _context.Board
-                .FirstOrDefaultAsync(m => m.UserId == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (board == null)
             {
                 return NotFound();
@@ -148,7 +148,7 @@ namespace Lira.Controllers
 
         private bool BoardExists(Guid id)
         {
-            return _context.Board.Any(e => e.UserId == id);
+            return _context.Board.Any(e => e.Id == id);
         }
     }
 }
