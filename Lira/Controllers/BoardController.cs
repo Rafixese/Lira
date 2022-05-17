@@ -45,6 +45,8 @@ namespace Lira.Controllers
                 return NotFound();
             }
 
+            var panels = await _context.Panel.Where(p => p.BoardId == id).ToListAsync();
+            ViewData["panels"] = panels;
             return View(board);
         }
 
