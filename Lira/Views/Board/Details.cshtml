@@ -7,11 +7,11 @@
 
 <div>
     <h4>Board @Model.Name</h4>
-    <hr />
+    <hr/>
 </div>
 <div>
     <div>
-        <a asp-action="Create" asp-route-boardid="@Model.Id" asp-controller="Panel">Create new panel</a>
+        <a class="btn btn-primary" asp-action="Create" asp-route-boardid="@Model.Id" asp-controller="Panel">Create new panel</a>
     </div>
     @{
         var panels = (List<Panel>)ViewData["panels"];
@@ -20,12 +20,22 @@
         <div class="d-flex flex-row flex-nowrap">
             @foreach (Panel panel in @panels)
             {
-                <div class="card card-body">@panel.Name</div>
+                <div class="card card-body m-2 container-fluid flex-nowrap d-flex flex-column" style="background-color: #EBECF0">
+                    <div class="flex-row">
+                        @panel.Name
+                        <div>
+                            <a asp-action="Create" asp-route-panelid="@panel.Id" asp-controller="Card">Add Task</a> |
+                            <a asp-action="Edit" asp-route-id="@panel.Id" asp-controller="Panel">Edit</a> | 
+                            <a asp-action="Delete" asp-route-id="@panel.Id" asp-controller="Panel">Delete</a>
+                        </div>
+                        <hr/>
+                    </div>
+                </div>
             }
         </div>
     </div>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.Id">Edit</a>
+    <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </div>

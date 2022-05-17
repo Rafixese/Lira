@@ -116,7 +116,7 @@ namespace Lira.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Board", new {id = panel.BoardId});
             }
             ViewData["BoardId"] = new SelectList(_context.Board, "Id", "Id", panel.BoardId);
             return View(panel);
@@ -149,7 +149,7 @@ namespace Lira.Controllers
             var panel = await _context.Panel.FindAsync(id);
             _context.Panel.Remove(panel);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "Board", new {id = panel.BoardId});
         }
 
         private bool PanelExists(Guid id)

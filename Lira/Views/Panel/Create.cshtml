@@ -7,9 +7,7 @@
     var boardid = ViewContext.HttpContext.Request.Query["boardid"];
 }
 
-<h1>Create</h1>
-
-<h4>Panel for board @boardid</h4>
+<h4>Create new panel</h4>
 <hr/>
 <div class="row">
     <div class="col-md-4">
@@ -29,7 +27,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Details" asp-route-id="@boardid" asp-controller="Board">Back to board</a>
 </div>
 
 @section Scripts {
