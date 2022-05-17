@@ -14,5 +14,7 @@ namespace Lira.Data
         {
         }
         public DbSet<Lira.Models.Board> Board { get; set; }
+        public DbSet<Lira.Models.Panel> Panel { get; set; }
+        public DbSet<Lira.Models.Card> Card { get; set; }
     }
 }
