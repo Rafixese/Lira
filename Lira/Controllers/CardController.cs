@@ -62,9 +62,10 @@ namespace Lira.Controllers
             if (ModelState.IsValid)
             {
                 card.Id = Guid.NewGuid();
+                var panel = _context.Panel.FindAsync(card.PanelId);
                 _context.Add(card);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Board", new {id = panel.Result.BoardId});
             }
             ViewData["PanelId"] = new SelectList(_context.Panel, "Id", "Id", card.PanelId);
             return View(card);
