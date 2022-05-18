@@ -68,12 +68,14 @@
 <script>
 
 function handleDragStart(e) {
-    console.log("handleDragStart");
     this.style.opacity = '0.8';
+    dragSrcEl = this;
+    
+    e.dataTransfer.effectAllowed = 'move';
+    e.dataTransfer.setData('text/html', this);
 }
 
 function handleDragEnd(e) {
-    console.log("handleDragEnd");
     this.style.opacity = '1';
     boxes.forEach(function (item) {
         item.classList.remove('over');
@@ -81,29 +83,33 @@ function handleDragEnd(e) {
 }
 
 function handleDragOver(e) {
-    console.log("handleDragOver");
+    // console.log("handleDragOver");
     e.preventDefault();
     // this.classList.add('over');
     return false;
   }
 
   function handleDragEnter(e) {
-    console.log("handleDragEnter");
-    console.log(e)
     if (e['toElement'].classList.contains('drag-box') && e['fromElement'].classList.contains('d-flex')) {
             this.classList.add('over');
     }
   }
 
   function handleDragLeave(e) {
-    console.log("handleDragLeave");
     if (e['toElement'].classList.contains('drag-box') && e['fromElement'].classList.contains('d-flex')) {
         this.classList.remove('over');
     }
   }
   
   function handleDrop(e) {
-    console.log("handleDrop");
+    if (dragSrcEl !== this){
+        this.append(dragSrcEl);
+        
+        var cardid = dragSrcEl.attributes['data-cardid'].value;
+        var panelid = this.attributes['data-panelid'].value;
+        console.log(cardid);
+        console.log(panelid);
+    }
     e.stopPropagation(); // stops the browser from redirecting.
     return false;
     }
