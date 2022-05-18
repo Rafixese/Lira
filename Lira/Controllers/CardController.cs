@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Lira.Data;
 using Lira.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace Lira.Controllers
 {
@@ -123,6 +127,16 @@ namespace Lira.Controllers
             }
             ViewData["PanelId"] = new SelectList(_context.Panel, "Id", "Id", card.PanelId);
             return View(card);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MoveCard([FromBody] CardMove cm)
+        {
+            var card = await _context.Card.FindAsync(cm.CardId);
+            card.PanelId = cm.PanelId;
+            _context.Update(card);
+            await _context.SaveChangesAsync();
+            return Ok();
         }
 
         // GET: Card/Delete/5
