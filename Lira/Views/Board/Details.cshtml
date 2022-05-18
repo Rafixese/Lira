@@ -89,13 +89,17 @@ function handleDragOver(e) {
 
   function handleDragEnter(e) {
     console.log("handleDragEnter");
-    this.classList.add('over');
+    console.log(e)
+    if (e['toElement'].classList.contains('drag-box') && e['fromElement'].classList.contains('d-flex')) {
+            this.classList.add('over');
+    }
   }
 
   function handleDragLeave(e) {
     console.log("handleDragLeave");
-    console.log(e);
-    this.classList.remove('over');
+    if (e['toElement'].classList.contains('drag-box') && e['fromElement'].classList.contains('d-flex')) {
+        this.classList.remove('over');
+    }
   }
   
   function handleDrop(e) {
