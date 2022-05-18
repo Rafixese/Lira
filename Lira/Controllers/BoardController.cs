@@ -47,6 +47,10 @@ namespace Lira.Controllers
 
             var panels = await _context.Panel.Where(p => p.BoardId == id).ToListAsync();
             ViewData["panels"] = panels;
+            
+            var panelIds = panels.Select(panel => panel.Id).ToList();
+            var cards = await _context.Card.Where(c => panelIds.Contains(c.PanelId)).ToListAsync();
+            ViewData["cards"] = cards;
             return View(board);
         }
 

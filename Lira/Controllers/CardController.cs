@@ -102,6 +102,7 @@ namespace Lira.Controllers
 
             if (ModelState.IsValid)
             {
+                var panel = _context.Panel.FindAsync(card.PanelId);
                 try
                 {
                     _context.Update(card);
@@ -118,7 +119,7 @@ namespace Lira.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Details", "Board", new {id = panel.Result.BoardId});
             }
             ViewData["PanelId"] = new SelectList(_context.Panel, "Id", "Id", card.PanelId);
             return View(card);
@@ -149,9 +150,10 @@ namespace Lira.Controllers
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
             var card = await _context.Card.FindAsync(id);
+            var panel = _context.Panel.FindAsync(card.PanelId);
             _context.Card.Remove(card);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", "Board", new {id = panel.Result.BoardId});
         }
 
         private bool CardExists(Guid id)

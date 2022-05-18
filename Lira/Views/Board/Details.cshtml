@@ -5,6 +5,16 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    .scroll-container {
+        overflow-x: auto;
+    }
+    
+    .drag-box.over {
+        border: 3px solid green;
+    }
+</style>
+
 <div>
     <h4>Board @Model.Name</h4>
     <hr/>
@@ -15,21 +25,36 @@
     </div>
     @{
         var panels = (List<Panel>)ViewData["panels"];
+        var cards = (List<Card>)ViewData["cards"];
     }
     <div class="container-fluid py-2">
-        <div class="d-flex flex-row flex-nowrap">
+        <div class="d-flex flex-row flex-nowrap scroll-container">
             @foreach (Panel panel in @panels)
             {
-                <div class="card card-body m-2 container-fluid flex-nowrap d-flex flex-column" style="background-color: #EBECF0">
+                <div data-panelid="@panel.Id" class="drag-box card card-body m-2 container-fluid flex-nowrap d-flex flex-column" style="background-color: #EBECF0; min-width: 300px">
                     <div class="flex-row">
                         @panel.Name
                         <div>
                             <a asp-action="Create" asp-route-panelid="@panel.Id" asp-controller="Card">Add Task</a> |
-                            <a asp-action="Edit" asp-route-id="@panel.Id" asp-controller="Panel">Edit</a> | 
+                            <a asp-action="Edit" asp-route-id="@panel.Id" asp-controller="Panel">Edit</a> |
                             <a asp-action="Delete" asp-route-id="@panel.Id" asp-controller="Panel">Delete</a>
                         </div>
                         <hr/>
                     </div>
+                    @foreach (Card card in @cards)
+                    {
+                        @if (card.PanelId == panel.Id)
+                        {
+                            <div data-cardid="@card.Id" class="card drag-card" draggable="true" style="cursor: move">
+                                <div class="card-body">
+                                    <h6 class="card-title">@card.Title</h6>
+                                    <p class="card-text">@card.Description</p>
+                                    <a asp-action="Edit" asp-route-id="@card.Id" asp-controller="Card">Edit</a> |
+                                    <a asp-action="Delete" asp-route-id="@card.Id" asp-controller="Card">Delete</a>
+                                </div>
+                            </div>
+                        }
+                    }
                 </div>
             }
         </div>
@@ -39,3 +64,68 @@
     <a asp-action="Edit" class="btn btn-primary" asp-route-id="@Model.Id">Edit</a>
     <a class="btn btn-primary" asp-action="Index">Back to List</a>
 </div>
+
+<script>
+
+function handleDragStart(e) {
+    console.log("handleDragStart");
+    this.style.opacity = '0.8';
+}
+
+function handleDragEnd(e) {
+    console.log("handleDragEnd");
+    this.style.opacity = '1';
+    boxes.forEach(function (item) {
+        item.classList.remove('over');
+    });
+}
+
+function handleDragOver(e) {
+    console.log("handleDragOver");
+    e.preventDefault();
+    // this.classList.add('over');
+    return false;
+  }
+
+  function handleDragEnter(e) {
+    console.log("handleDragEnter");
+    this.classList.add('over');
+  }
+
+  function handleDragLeave(e) {
+    console.log("handleDragLeave");
+    console.log(e);
+    this.classList.remove('over');
+  }
+  
+  function handleDrop(e) {
+    console.log("handleDrop");
+    e.stopPropagation(); // stops the browser from redirecting.
+    return false;
+    }
+
+let cards = document.querySelectorAll('.drag-card');
+let boxes = document.querySelectorAll('.drag-box');
+console.log(cards);
+console.log(boxes);
+boxes.forEach(function (item) {
+    console.log(item);
+  // item.addEventListener('dragstart', handleDragStart);
+  item.addEventListener('dragover', handleDragOver);
+  item.addEventListener('dragenter', handleDragEnter);
+  item.addEventListener('dragleave', handleDragLeave);
+  // item.addEventListener('dragend', handleDragEnd);
+  item.addEventListener('drop', handleDrop);
+});
+
+cards.forEach(function (item) {
+    console.log(item);
+  item.addEventListener('dragstart', handleDragStart);
+  // item.addEventListener('dragover', handleDragOver);
+  // item.addEventListener('dragenter', handleDragEnter);
+  // item.addEventListener('dragleave', handleDragLeave);
+  item.addEventListener('dragend', handleDragEnd);
+  // item.addEventListener('drop', handleDrop);
+});
+
+</script>
