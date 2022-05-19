@@ -1,8 +1,33 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@inject SignInManager<IdentityUser> SignInManager
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome to Lira</h1>
-    <p>It's a mentally disabled Jira like program.</p>
+<style>
+    body > .container {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+</style>
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container jumbo-text">
+        <h1 class="display-4">Welcome to Lira</h1>
+        <p class="lead">It's a mentally disabled Jira like program.</p>
+        @if (!SignInManager.IsSignedIn(User))
+        {
+            <p>Create new account today to start adding ToDo tasks and never do them.</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" asp-area="Identity" asp-page="/Account/Register" role="button">Register</a>
+            </p>
+        }
+    </div>
 </div>
+
+
+<script>
+    var nav = document.getElementsByClassName('navbar')[0];
+    nav.classList.remove('mb-3');
+</script>

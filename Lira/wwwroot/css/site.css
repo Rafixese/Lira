@@ -69,3 +69,16 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+.jumbotron {
+  background-image: url("../jumbotron@0,5x.jpg");
+  background-size: cover;
+  height: 94vh;
+  width:99vw;
+}
+
+.jumbo-text {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 3rem;
+  padding: 3rem;
+}
