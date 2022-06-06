@@ -125,3 +125,5 @@ public class Panel
      public Board Board { get; set; }
  }
 ```
+
+![](docs/work.jpg)
