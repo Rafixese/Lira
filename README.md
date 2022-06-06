@@ -3,6 +3,8 @@ Lira to klon aplikacji Trello. W większości funkcji został uproszczony na
 potrzeby zajęć. Jest to aplikacja do zarządzania zadaniami i przerzucaniu
 ich pomiędzy kolumnami np. ToDo, In progress i Done.
 
+![](docs/lira.jpg)
+
 ## Spis treści
 
 1. [Opis funkcjonalności](#opis-funkcjonalności)
@@ -11,7 +13,11 @@ ich pomiędzy kolumnami np. ToDo, In progress i Done.
    3. [Logowanie](#logowanie)
    4. [Tablice](#boards)
    5. [Widok tablicy](#board)
-2. 
+2. [Modele](#models)
+   1. [Board](#models-board)
+   2. [Card](#models-card)
+   3. [CardMove](#models-cardmove)
+   4. [Panel](#models-panel)
 
 ## Opis funkcjonalności <a name="opis-funkcjonalności"></a>
 ### Strona główna <a name="strona-gwna"></a>
@@ -74,3 +80,48 @@ odpowiedniego panelu.
 Strona tablicy zawiera przycisk do tworzenia nowych paneli oraz każdy
 panel jest zaopatrzony w 3 przyciski pozwalające na tworzenie, 
 edytowanie i usuwanie zadań.
+
+## Modele <a name="models"></a>
+
+Pomijam modele do Logowania i Rejestracji ale one gdzieś tam są :)
+
+### Board <a name="models-board"></a>
+```csharp
+public class Board
+ {
+     [Key]
+     public Guid Id { get; set; }
+     public string Name { get; set; }
+     public Guid UserId { get; set; }
+     public virtual IdentityUser User { get; set; }
+ }
+```
+### Card <a name="models-card"></a>
+```csharp
+public class Card
+ {
+     [Key] public Guid Id { get; set; }
+     public string Title { get; set; }
+     public string Description { get; set; }
+     public Guid PanelId { get; set; }
+     public Panel Panel { get; set; }
+ }
+```
+### CardMove <a name="models-cardmove"></a>
+```csharp
+public class CardMove
+ {
+     public Guid CardId { get; set; }
+     public Guid PanelId { get; set; }
+ }
+```
+### Panel <a name="models-panel"></a>
+```csharp
+public class Panel
+ {
+     [Key] public Guid Id { get; set; }
+     public string Name { get; set; }
+     public Guid BoardId { get; set; }
+     public Board Board { get; set; }
+ }
+```
