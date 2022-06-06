@@ -8,6 +8,9 @@ ich pomiędzy kolumnami np. ToDo, In progress i Done.
 1. [Opis funkcjonalności](#opis-funkcjonalności)
    1. [Strona główna](#strona-gwna)
    2. [Rejestracja](#rejestracja)
+   3. [Logowanie](#logowanie)
+   4. [Tablice](#boards)
+   5. [Widok tablicy](#board)
 2. 
 
 ## Opis funkcjonalności <a name="opis-funkcjonalności"></a>
@@ -35,7 +38,7 @@ email.
 
 ![](docs/confirmation.png "")
 
-### Logowanie
+### Logowanie <a name="logowanie"></a>
 
 W widoku logowanie użytkownik jest proszony o podanie adresu email i
 hasła. Również funkcjonalny jest przycisk "Remember me", który pozwala
@@ -48,7 +51,7 @@ do tablic użytkownika.
 
 ![](docs/navbar.png)
 
-### Tablice
+### Tablice <a name="boards"></a>
 Strona Boards prezentuje listę tablic użytkownika, wraz z przyciskami
 służącymi do przejścia do danej tablicy, edycji czy usunięcia tablicy.
 
@@ -59,7 +62,7 @@ Użytkownik może dodawać nowe tablice wykorzystując przycisk
 
 ![](docs/create_board.png)
 
-### Widok tablicy
+### Widok tablicy <a name="board"></a>
 
 Tablica składa się z paneli, które definiuje użytkownik. Każdy panel
 zawiera zadania, które stworzył użytkownik. Zadania można przenosić
